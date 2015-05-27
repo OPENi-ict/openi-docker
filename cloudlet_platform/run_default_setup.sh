@@ -35,7 +35,7 @@ docker run -d --name object_api       -v $LOG_OUTPUT_PATH_ROOT:/opt/openi/cloudl
 cloudlet_api=$( cat cloudlet_platform/conf.json | ./json.sh -p | egrep '\["cloudlet_api"*"\]' | sed -e 's/\[\"cloudlet_api\"\]//g')
 docker run -d --name cloudlet_api     -v $LOG_OUTPUT_PATH_ROOT:/opt/openi/cloudlet_platform/logs/   --net=container:openicb	openiicteu/cloudlet_platform 	-w cloudlet_api     -c $cloudlet_api
 
-attachments_api=$( cat cloudlet_platform/conf.json | ./json.sh -p | egrep '\["attachments_api"*"\]' | sed -e 's/\[\"attachments_api\"\]//g')
+attachments_api=\'$( cat cloudlet_platform/conf.json | ./json.sh -p | egrep '\["attachments_api"*"\]' | sed -e 's/\[\"attachments_api\"\]//g')\'
 docker run -d --name attachments_api  -v $LOG_OUTPUT_PATH_ROOT:/opt/openi/cloudlet_platform/logs/   --net=container:openicb	openiicteu/cloudlet_platform 	-w attachments_api  -c $attachments_api
 
 search_api=$( cat cloudlet_platform/conf.json | ./json.sh -p | egrep '\["search_api"*"\]' | sed -e 's/\[\"search_api\"\]//g')
